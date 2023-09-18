@@ -141,92 +141,93 @@ Default: FALSE
 >- **CHEM_LBC_FILE**: volumn mixing ratios are set from the chemistry lower boundary conditions dataset specified by [flbc_file](#flbc_file)
 >- Default: set by build-namelist
 
->>**FIXED**
->>##### (1) co2vmr
+**FIXED**
+##### (1) co2vmr
 |Entry type|Possible default values|
 |---       |---         |
 |real      |367.0e-6    |
->>- CO2 volume mixing ratio. This is used as the [***time invariant surface value***](#b.-CCSM_CO2_PPMV) of CO2 if no time varying values are specified.  
->>- Default: set by build-namelist
->>- [scenario_ghg='FIXED'](#Catogories:-ghg_cam)
+>- CO2 volume mixing ratio. This is used as the [***time invariant surface value***](#b.-CCSM_CO2_PPMV) of CO2 if no time varying values are specified.  
+>- Default: set by build-namelist
+>- [scenario_ghg='FIXED'](#Catogories:-ghg_cam)
 
->>**RAMPED_CO2_ONLY**
->>##### (2) ramp_co2_annual_rate
+**RAMPED_CO2_ONLY**
+##### (2) ramp_co2_annual_rate
 |Entry type|Valid values|
 |---       |---         |
 |real      |any real    |
->>- Amount of co2 ramping per year (percent).
->>- Only used if scenario_ghg = 'RAMP_CO2_ONLY'  
->>- Default: 1.0
+>- Amount of co2 ramping per year (percent).
+>- Only used if scenario_ghg = 'RAMP_CO2_ONLY'  
+>- Default: 1.0
 
->>##### (3) ramp_co2_cap
+##### (3) ramp_co2_cap
 |Entry type|Valid values|
 |---       |---         |
 |real      |any real    |
->>- CO2 cap if > 0, floor otherwise. Specified as multiple or fraction of inital value
->>- e.g., Setting to 4.0 will cap at 4x initial CO2 setting.
->>- Only used if scenario_ghg = 'RAMP_CO2_ONLY'  
->>- Default: boundless if ramp_co2_annual_rate > 0, zero otherwise.
+>- CO2 cap if > 0, floor otherwise. Specified as multiple or fraction of inital value
+>- e.g., Setting to 4.0 will cap at 4x initial CO2 setting.
+>- Only used if scenario_ghg = 'RAMP_CO2_ONLY'  
+>- Default: boundless if ramp_co2_annual_rate > 0, zero otherwise.
 
->>##### (4) ramp_co2_start_ymd
+##### (4) ramp_co2_start_ymd
 |Entry type|Valid values|
 |---       |---         |
 |integer   |any integer |
->>- Date on which ramping of CO2 begins. The date is encoded as an integer in the form YYYYMMDD.
->>- Only used if scenario_ghg = 'RAMP_CO2_ONLY'
->>- Default: 0
+>- Date on which ramping of CO2 begins. The date is encoded as an integer in the form YYYYMMDD.
+>- Only used if scenario_ghg = 'RAMP_CO2_ONLY'
+>- Default: 0
 
->>**CHEM_LBC_FILE**
->>##### (5) flbc_file
+**CHEM_LBC_FILE**
+##### (5) flbc_file
 |Entry type|Valid values|
 |---       |---         |
 |char*256  |any char    |
->>- Full pathname of dataset for fixed lower boundary conditions.
->>- (e.g.) atm/waccm/lb/LBC_1765-2100_1.9x2.5_CCMI_RCP60_za_RNOCStrend_c141002.nc
->>- Default: set by build-namelist.
+- Full pathname of dataset for fixed lower boundary conditions.
+- (e.g.) atm/waccm/lb/LBC_1765-2100_1.9x2.5_CCMI_RCP60_za_RNOCStrend_c141002.nc
+- Default: set by build-namelist.
 
->>##### (6) flbc_type
+##### (6) flbc_type
 |Entry type|Valid values|
 |---       |---         |
 |char*8    |'CYCLICAL'<br>'SERIAL'<br>'FIXED'|
->>- Type of time interpolation for fixed lower boundary data.
->>- Default: 'CYCLICAL'
+>- Type of time interpolation for fixed lower boundary data.
+>- Default: 'CYCLICAL'
 
->>>##### (7) flbc_cycle_yr
+##### (7) flbc_cycle_yr
 |Entry type|Valid values|
 |---       |---         |
 |integer   |any integer |
->>>- The cycle year of the fixed lower boundary data if flbc_type is 'CYCLICAL'.
->>>- Format: YYYY
->>>- Default: 0
->>>##### (8) flbc_fixed_ymd
+>- The cycle year of the fixed lower boundary data if flbc_type is 'CYCLICAL'.
+>- Format: YYYY
+>- Default: 0
+
+##### (8) flbc_fixed_ymd
 |Entry type|Valid values|
 |---       |---         |
 |integer   |any integer |
->>>- The date at which the fixed lower boundary data is fixed
->>>if flbc_type is 'FIXED'.
->>>- Format: YYYYMMDD
->>>- Default: 0
+>- The date at which the fixed lower boundary data is fixed
+>if flbc_type is 'FIXED'.
+>- Format: YYYYMMDD
+>- Default: 0
 
->>**RAMPED**
->>##### (9) bndtcghg
+**RAMPED**
+##### (9) bndtcghg
 |Entry type|Valid values|
 |---       |---         |
 |char*256  |any char    |
->>- Full pathname of time-variant boundary dataset for greenhouse gas surface values.
->>- Default: set by build-namelist.
->>- (e.g.) atm/cam/ggas/ghg_hist_1765-2005_c091218.nc
+>- Full pathname of time-variant boundary dataset for greenhouse gas surface values.
+>- Default: set by build-namelist.
+>- (e.g.) atm/cam/ggas/ghg_hist_1765-2005_c091218.nc
 
->>> ##### (10) rampyear_ghg
+##### (10) rampyear_ghg
 |Entry type|Valid values|
 |---       |---         |
 |integer   |any integer |
->>>- If scenario_ghg is set to "RAMPED" then the greenhouse
+>- If scenario_ghg is set to "RAMPED" then the greenhouse
 gas surface values are interpolated between the annual average values read from the file specified by [bndtvghg](#-bndtcghg)
->>>- In that case, the value of this variable (> 0) fixes the year of the lower bounding value (i.e., the value for calendar day 1.0) used in the
+>- In that case, the value of this variable (> 0) fixes the year of the lower bounding value (i.e., the value for calendar day 1.0) used in the
 interpolation.
->>>- For example, if rampyear_ghg = 1950, then the GHG surface values will be the result of interpolating between the values for 1950 and 1951 from the dataset.
->>>- Default: 0
+>- For example, if rampyear_ghg = 1950, then the GHG surface values will be the result of interpolating between the values for 1950 and 1951 from the dataset.
+>- Default: 0
 
 
 
